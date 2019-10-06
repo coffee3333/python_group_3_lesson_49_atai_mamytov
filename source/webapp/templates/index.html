@@ -13,12 +13,11 @@
                 <div class="card rounded-0">
                     <div class="card-body">
                         <h4>{{ tracker.summary }} </h4>
-                        <h5>{{ tracker.description }}</h5>
-{% comment %}                        <div class="container mb-5">{{ book.entry }}</div>
+                        <div class="container mb-5">{{ tracker.description }}</div>
                         <div class="container">
-                            <a href="{% url 'book_edit' book.pk %}" class="btn btn-outline-success  btn-block">Edit</a>
+                            <a href="{% url 'task_track' tracker.pk %}" class="btn btn-outline-success  btn-block">More</a>
                         </div>
-                        <div class="container">
+{% comment %}                        <div class="container">
                             <a href="{% url 'book_delete' book.pk %}" class="btn btn-outline-success  btn-block">Delete</a>
                         </div>{% endcomment %}
                     </div>
