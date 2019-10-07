@@ -10,6 +10,7 @@
     {% for status in statuses %}
         <div class="container">
             <h4>Status: {{ status.status }} </h4>
+            <a href="{% url 'status_edit' status.pk %}" class="btn btn-outline-success">Edit</a>
         </div>
         <hr>
     {% endfor %}

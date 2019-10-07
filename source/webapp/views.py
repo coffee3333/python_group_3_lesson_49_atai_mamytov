@@ -125,3 +125,33 @@ def statuses_create_view(request, *args, **kwargs):
             return render(request, 'create_status.html', context={'form': form})
 
 
+def types_edit_view(request, pk):
+    type = get_object_or_404(Type, pk=pk)
+    if request.method == 'GET':
+        form = TypeForm(data={'type' : type.type})
+        return render(request, 'update_type.html', context={'form': form, 'type': type})
+    elif request.method == 'POST':
+        form = TypeForm(data=request.POST)
+        if form.is_valid():
+            type.type = request.POST.get('type')
+            type.save()
+            return redirect('type_ls')
+        else:
+            return render(request, 'update_type.html', context={'type': type, 'form': form})
+    return redirect('type_ls')
+
+
+def statuses_edit_view(request, pk):
+    statuses = get_object_or_404(Status, pk=pk)
+    if request.method == 'GET':
+        form = StatusForm(data={'status' : statuses.status})
+        return render(request, 'update_status.html', context={'form': form, 'status': statuses})
+    elif request.method == 'POST':
+        form = StatusForm(data=request.POST)
+        if form.is_valid():
+            statuses.status = request.POST.get('status')
+            statuses.save()
+            return redirect('status_ls')
+        else:
+            return render(request, 'update_status.html', context={'status': statuses, 'form': form})
+    return redirect('status_ls')

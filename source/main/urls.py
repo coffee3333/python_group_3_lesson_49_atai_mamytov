@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from webapp.views import IndexView, TaskTrackerView, TaskTrackerCraeteView, TaskTrackerUpdateView, TaskTrackerDeleteView, types_list, status_list, types_create_view, statuses_create_view
+from webapp.views import IndexView, TaskTrackerView, TaskTrackerCraeteView, TaskTrackerUpdateView, TaskTrackerDeleteView, \
+    types_list, status_list, types_create_view, statuses_create_view, types_edit_view, statuses_edit_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,7 @@ urlpatterns = [
     path('types/', types_list, name='type_ls'),
     path('statuses/', status_list, name='status_ls'),
     path('types/create/', types_create_view, name='type_create'),
-    path('statuses/create/', statuses_create_view, name='status_create')
+    path('statuses/create/', statuses_create_view, name='status_create'),
+    path('types/edit/<int:pk>', types_edit_view, name='type_edit'),
+    path('statuses/edit/<int:pk>', statuses_edit_view, name='status_edit')
 ]
