@@ -11,6 +11,7 @@
         <div class="container">
             <h4>Status: {{ status.status }} </h4>
             <a href="{% url 'status_edit' status.pk %}" class="btn btn-outline-success">Edit</a>
+            <a href="{% url 'status_delete' status.pk %}" class="btn btn-outline-success">Delete</a>
         </div>
         <hr>
     {% endfor %}

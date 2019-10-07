@@ -155,3 +155,21 @@ def statuses_edit_view(request, pk):
         else:
             return render(request, 'update_status.html', context={'status': statuses, 'form': form})
     return redirect('status_ls')
+
+
+def type_delete_view(request, pk):
+    type = get_object_or_404(Type, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'delete_type.html', context={'type': type})
+    elif request.method == 'POST':
+        type.delete()
+        return redirect('type_ls')
+
+
+def statuses_delete_view(request, pk):
+    statuses = get_object_or_404(Status, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'delete_status.html', context={'status': statuses})
+    elif request.method == 'POST':
+        statuses.delete()
+        return redirect('status_ls')
