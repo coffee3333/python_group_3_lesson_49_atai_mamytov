@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% comment %}{% block menu %}
-    <a href="{% url 'book_add' %}" class="btn btn-outline-light">Add entry</a>
-{% endblock %}{% endcomment %}
+{% block menu %}
+    <a href="{% url 'task_track_add' %}" class="btn btn-outline-light">Add entry</a>
+{% endblock %}
 
 {% block content %}
     <h1 class="mt-5">Tracker</h1>
@@ -17,9 +17,9 @@
                         <div class="container">
                             <a href="{% url 'task_track' tracker.pk %}" class="btn btn-outline-success  btn-block">More</a>
                         </div>
-{% comment %}                        <div class="container">
-                            <a href="{% url 'book_delete' book.pk %}" class="btn btn-outline-success  btn-block">Delete</a>
-                        </div>{% endcomment %}
+                        <div class="container">
+                            <a href="{% url 'task_track_edit' tracker.pk %}" class="btn btn-outline-success  btn-block">Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
