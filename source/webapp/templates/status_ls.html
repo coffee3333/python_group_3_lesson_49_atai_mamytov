@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <a href="{% url 'status_create' %}" class="btn btn-outline-light">Add Status</a>
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Statuses list</h1>
+    <hr/>
+    {% for status in statuses %}
+        <div class="container">
+            <h4>Status: {{ status.status }} </h4>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

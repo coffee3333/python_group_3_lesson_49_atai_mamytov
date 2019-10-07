@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, TemplateView
 
 from webapp.models import Tracker, Type, Status
-from webapp.forms import TrackerForm
+from webapp.forms import TrackerForm, TypeForm, StatusForm
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -91,3 +91,37 @@ class TaskTrackerDeleteView(View):
     def get_odject(self, pk):
         task_tracker = get_object_or_404(Tracker, pk = pk)
         return task_tracker
+
+def types_list(request, *args, **kwargs):
+    types = Type.objects.all()
+    return render(request, 'types_ls.html', context={'types': types})
+
+def status_list(request, *args, **kwargs):
+    statuses = Status.objects.all()
+    return render(request, 'status_ls.html', context={'statuses': statuses})
+
+def types_create_view(request, *args, **kwargs):
+    if request.method == 'GET':
+        form = TypeForm()
+        return render(request, 'create_type.html', context={'form': form})
+    elif request.method == 'POST':
+        form = TypeForm(data=request.POST)
+        if form.is_valid():
+            Type.objects.create(type=form.cleaned_data['type'])
+            return redirect('type_ls')
+        else:
+            return render(request, 'create_type.html', context={'form': form})
+
+def statuses_create_view(request, *args, **kwargs):
+    if request.method == 'GET':
+        form = StatusForm()
+        return render(request, 'create_status.html', context={'form': form})
+    elif request.method == 'POST':
+        form = StatusForm(data=request.POST)
+        if form.is_valid():
+            Status.objects.create(type=form.cleaned_data['status'])
+            return redirect('status_ls')
+        else:
+            return render(request, 'create_status.html', context={'form': form})
+
+
