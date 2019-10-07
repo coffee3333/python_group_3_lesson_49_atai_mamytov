@@ -77,53 +77,17 @@ class TaskTrackerUpdateView(View):
         return task_tracker
 
 
+class TaskTrackerDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        task_tracker = self.get_odject(self.kwargs.get('pk'))
+        context = {'task_tracker': task_tracker}
+        return render(request, 'delete.html', context)
 
-# def article_update_view(request, pk):
-#     article = get_object_or_404(Article, pk=pk)
-#     if request.method == 'GET':
-#         return render(request, 'update.html', context={'article': article})
-#     elif request.method == 'POST':
-#         article.title = request.POST.get('title')
-#         article.author = request.POST.get('author')
-#         article.text = request.POST.get('text')
-#
-#         errors = {}
-#         if not article.title:
-#             errors['title'] = 'Title should not be empty!'
-#         elif len(article.title) > 200:
-#             errors['title'] = 'Title should be 200 symbols or less!'
-#
-#         if not article.author:
-#             errors['author'] = 'Author should not be empty!'
-#         elif len(article.author) > 40:
-#             errors['author'] = 'Author should be 40 symbols or less!'
-#
-#         if not article.text:
-#             errors['text'] = 'Text should not be empty!'
-#         elif len(article.text) > 3000:
-#             errors['text'] = 'Text should be 3000 symbols or less!'
-#
-#         if len(errors) > 0:
-#             return render(request, 'update.html', context={
-#                 'errors': errors,
-#                 'article': article
-#             })
-#
-#         article.save()
-#         return redirect('article_view', pk=article.pk)
+    def post(self, request, *args, **kwargs):
+        task_tracker = self.get_odject(self.kwargs.get('pk'))
+        task_tracker.delete()
+        return redirect('index')
 
-# def book_create_view(request, *args, **kwargs):
-#     if request.method == 'GET':
-#         form = BookForm()
-#         return render(request, 'create.html', context={'form': form})
-#     elif request.method == 'POST':
-#         form = BookForm(data=request.POST)
-#         if form.is_valid():
-#             Books.objects.create(
-#                 name_author=form.cleaned_data['name_author'],
-#                 mail_author=form.cleaned_data['mail_author'],
-#                 entry=form.cleaned_data['entry']
-#             )
-#             return redirect('index')
-#         else:
-#             return render(
+    def get_odject(self, pk):
+        task_tracker = get_object_or_404(Tracker, pk = pk)
+        return task_tracker

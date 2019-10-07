@@ -3,7 +3,7 @@
 {% block title %}Update Task Tracker{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'task_track' task_tracker.pk %}">View</a></li>
+    <a href="{% url 'task_track' task_tracker.pk %}" class="btn btn-outline-light">View</a>
 {% endblock %}
 
 {% block content %}
